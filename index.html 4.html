@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Confectionary Atelier</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--gold:#D4AF37;
+--gold-light:#F4E4A6;
+--black:#050505;
+--panel:#101010;
+--purple:#6E2AA6;
+--peach:#E9B38A;
+--white:#F7F5F0;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:
+radial-gradient(circle at top right,#111 0%,#050505 45%),
+linear-gradient(135deg,#080808,#0f0f0f);
+color:var(--white);
+font-family:'Cormorant Garamond',serif;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+linear-gradient(45deg,
+transparent 48%,
+rgba(212,175,55,0.02) 50%,
+transparent 52%);
+pointer-events:none;
+}
+
+.particles{
+position:fixed;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+z-index:0;
+}
+
+.particles span{
+position:absolute;
+width:4px;
+height:4px;
+background:var(--gold);
+border-radius:50%;
+animation:float 12s linear infinite;
+opacity:.5;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+20%{
+opacity:.5;
+}
+100%{
+transform:translateY(-100px);
+opacity:0;
+}
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:40px;
+position:relative;
+z-index:1;
+}
+
+.logo{
+font-size:5rem;
+font-family:'Cinzel',serif;
+letter-spacing:8px;
+color:var(--gold);
+text-shadow:0 0 30px rgba(212,175,55,.3);
+}
+
+.subtitle{
+margin-top:20px;
+font-size:1.5rem;
+opacity:.9;
+max-width:700px;
+}
+
+.tagline{
+margin-top:10px;
+color:var(--gold-light);
+font-style:italic;
+}
+
+.btn{
+margin-top:40px;
+padding:18px 42px;
+border:1px solid var(--gold);
+background:transparent;
+color:var(--gold);
+font-family:'Cinzel',serif;
+cursor:pointer;
+transition:.4s;
+}
+
+.btn:hover{
+background:var(--gold);
+color:black;
+box-shadow:0 0 25px rgba(212,175,55,.4);
+}
+
+.section-title{
+font-family:'Cinzel',serif;
+text-align:center;
+font-size:3rem;
+color:var(--gold);
+margin-bottom:60px;
+}
+
+.products{
+padding:100px 40px;
+position:relative;
+z-index:1;
+}
+
+.cards{
+display:flex;
+gap:40px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.card{
+width:350px;
+height:450px;
+background:rgba(20,20,20,.95);
+border:1px solid rgba(212,175,55,.15);
+border-radius:24px;
+overflow:hidden;
+position:relative;
+cursor:pointer;
+transition:.5s;
+backdrop-filter:blur(10px);
+}
+
+.card:hover{
+transform:translateY(-15px);
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+.card::before{
+content:"";
+position:absolute;
+width:0;
+height:0;
+border-radius:50%;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+transition:1s;
+opacity:.25;
+}
+
+.card.active::before{
+width:700px;
+height:700px;
+}
+
+.grape::before{
+background:var(--purple);
+}
+
+.peach::before{
+background:var(--peach);
+}
+
+.mix::before{
+background:var(--gold);
+}
+
+.card-content{
+position:relative;
+z-index:2;
+padding:40px;
+text-align:center;
+}
+
+.card h2{
+font-family:'Cinzel',serif;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.card p{
+font-size:1.2rem;
+line-height:1.6;
+}
+
+.card-icon{
+font-size:5rem;
+margin-bottom:25px;
+transition:.8s;
+}
+
+.card:hover .card-icon{
+transform:rotate(12deg) scale(1.1);
+}
+
+.reserve{
+padding:100px 30px;
+max-width:800px;
+margin:auto;
+position:relative;
+z-index:1;
+}
+
+.reserve-box{
+background:rgba(15,15,15,.95);
+border:1px solid rgba(212,175,55,.2);
+padding:40px;
+border-radius:25px;
+}
+
+input,
+select{
+width:100%;
+padding:16px;
+margin-top:15px;
+background:#111;
+border:1px solid #333;
+color:white;
+font-size:1rem;
+}
+
+.submit{
+width:100%;
+margin-top:25px;
+padding:18px;
+background:var(--gold);
+border:none;
+font-family:'Cinzel',serif;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.submit:hover{
+transform:scale(1.02);
+}
+
+.footer{
+padding:50px;
+text-align:center;
+border-top:1px solid rgba(212,175,55,.1);
+margin-top:80px;
+}
+
+.footer h3{
+font-family:'Cinzel',serif;
+color:var(--gold);
+margin-bottom:15px;
+}
+
+@media(max-width:768px){
+
+.logo{
+font-size:3rem;
+}
+
+.subtitle{
+font-size:1.1rem;
+}
+
+.card{
+width:100%;
+max-width:350px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="particles">
+<span style="left:5%;animation-delay:0s"></span>
+<span style="left:15%;animation-delay:2s"></span>
+<span style="left:25%;animation-delay:4s"></span>
+<span style="left:35%;animation-delay:6s"></span>
+<span style="left:45%;animation-delay:8s"></span>
+<span style="left:55%;animation-delay:3s"></span>
+<span style="left:65%;animation-delay:7s"></span>
+<span style="left:75%;animation-delay:5s"></span>
+<span style="left:85%;animation-delay:1s"></span>
+<span style="left:95%;animation-delay:9s"></span>
+</div>
+
+<section class="hero">
+
+<div class="logo">CONFECTIONARY ATELIER</div>
+
+<p class="subtitle">
+Small-batch luxury sugar-free mints crafted for discerning collectors.
+</p>
+
+<p class="tagline">
+Crafted for the Exceptional
+</p>
+
+<button class="btn">
+REQUEST ALLOCATION
+</button>
+
+</section>
+
+<section class="products">
+
+<h2 class="section-title">The Collection</h2>
+
+<div class="cards">
+
+<div class="card grape">
+<div class="card-content">
+<div class="card-icon">🍇</div>
+<h2>Grape Noir</h2>
+<p>
+Deep grape notes.
+Sophisticated sweetness.
+Presented in an exclusive black collector tin.
+</p>
+</div>
+</div>
+
+<div class="card peach">
+<div class="card-content">
+<div class="card-icon">🍑</div>
+<h2>Peach Élite</h2>
+<p>
+Refined peach elegance.
+Smooth and delicate.
+Reserved for modern luxury enthusiasts.
+</p>
+</div>
+</div>
+
+<div class="card mix">
+<div class="card-content">
+<div class="card-icon">⚜️</div>
+<h2>Mix & Match Reserve</h2>
+<p>
+Create your own blend.
+25/75, 50/50, or 75/25.
+A bespoke mint experience.
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="reserve">
+
+<h2 class="section-title">Reserve Allocation</h2>
+
+<div class="reserve-box">
+
+<input type="text" placeholder="Full Name">
+
+<input type="email" placeholder="Email Address">
+
+<input type="tel" placeholder="Phone Number">
+
+<select>
+<option>Grape Noir</option>
+<option>Peach Élite</option>
+<option>Mix & Match Reserve</option>
+</select>
+
+<input type="number" placeholder="Desired Quantity">
+
+<button class="submit">
+JOIN THE ALLOCATION LIST
+</button>
+
+</div>
+
+</section>
+
+<footer class="footer">
+<h3>CONFECTIONARY ATELIER</h3>
+<p>Luxury Sugar-Free Confectionery</p>
+<p>Singapore</p>
+</footer>
+
+<script>
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+document.querySelectorAll(".card")
+.forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
